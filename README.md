@@ -1,4 +1,4 @@
-# JdunionSdk
+# unionsdk
 
 
 ![version](https://img.shields.io/badge/version-v1.0.0-orange.svg)
@@ -8,10 +8,10 @@
 
 ## 安装
 ```shell
-go get https://github.com/yancyzhou/JdunionSdk_Goalng.git
+go get https://github.com/yancyzhou/unionsdk.git
 ```
 
-﻿京东联盟 SDK JDunionSdk V1.3.0
+﻿京东联盟 SDK unionsdk
 ===================
 作者接一切数据&Web&小程序开发外包服务，介绍人提供10%-20%佣金。可签合同、开正规公司发票。
 
