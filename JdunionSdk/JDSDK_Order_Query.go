@@ -2,7 +2,6 @@ package JdunionSdk
 
 import (
 	"encoding/json"
-	"fmt"
 	"strings"
 	"time"
 )
@@ -93,10 +92,8 @@ func (J *JdSdk) GetOrders(ParamJsons string) (result *OrderResult) {
 	urls.WriteString(JD_HOST)
 	urls.WriteString(J.SignAndUri)
 	body, _ := HttpGet(urls.String())
-	fmt.Println(urls.String())
 	response := &JdUnionOpenOrderQueryResponse{}
 	e := json.Unmarshal([]byte(body), &response)
-	fmt.Println(response)
 	if e != nil {
 		panic(e)
 	}
