@@ -34,7 +34,7 @@ func (J *JdSdk) GetCategoryList(UriQuery string) (categoryResult *CateGoryResult
 	Method := "jd.union.open.category.goods.get"
 	J.SetSignJointUrlParam(Method, UriQuery)
 	var urls strings.Builder
-	urls.WriteString(JD_HOST)
+	urls.WriteString(J.JdHost)
 	urls.WriteString(J.SignAndUri)
 	body, _ := HttpGet(urls.String())
 	result := &CategoryResponse{}

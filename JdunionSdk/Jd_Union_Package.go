@@ -1,25 +1,25 @@
 package JdunionSdk
 
-import "time"
-
-const (
-	JD_HOST            string = "https://router.jd.com/api?"
-	CUSTOMREQMETHODGET string = "GET"
+import (
+	"encoding/json"
+	"strings"
+	"time"
 )
 
 //定义接口
 type JdSdkApi interface {
-	//GoodsMaterialQuery(query string) *GoodsMaterialQueryResult //jd.union.open.goods.material.query
-	//OrderBonusQuery(query string) *OrderBonusQueryResult       //jd.union.open.order.bonus.query
-	//OrderRowQuery(query string) *OrderRowQueryResult           //jd.union.open.order.row.query
-	//GetPromotionCommon(query string) *PromotionCommonResult    //jd.union.open.promotion.common.get
-	//ConversionLink(query string) *SubUnionIdResult             //jd.union.open.promotion.bysubunionid.get
-	//GetJdGoods(query string) *GoodsResult                      //jd.union.open.goods.query
-	//GetCategoryList(query string) *CateGoryResult              //jd.union.open.category.goods.get
-	//GetGoodsJFen(query string) *JFRestult                      //jd.union.open.goods.jingfen.query
-	//GetOrders(query string) *OrderResult                       //jd.union.open.order.query
-	//SetSignJointUrlParam(Method string, query string) *JdSdk   //携带请求参数签名
+	PromotionCommon(query string) *PromotionCommonResult //jd.union.open.promotion.common.get
+	OrderRowQuery(query string) *OrderRowQueryResult     //jd.union.open.order.row.query
+	OrderBonusQuery(query string) *OrderBonusQueryResult //jd.union.open.order.bonus.query
+	ConversionLink(query string) *SubUnionIdResult       //jd.union.open.promotion.bysubunionid.get
+	GetJdGoods(query string) *GoodsResult                //jd.union.open.goods.query
+	GetCategoryList(query string) *CateGoryResult        //jd.union.open.category.goods.get
+	GetGoodsJFen(query string) *JFRestult                //jd.union.open.category.goods.get
+	GetOrders(query string) *OrderResult                 //jd.union.open.order.query
+	SetSignJointUrlParam(Method string, query string) *JdSdk
 }
+
+//var _ JdSdkApi = &JdSdk{}
 
 type Param struct {
 	Method       string `json:"method"`
@@ -31,27 +31,47 @@ type Param struct {
 	Sign_method  string `json:"sign_method"`
 	Param_json   string `json:"param_json"`
 }
-
 type JdSdk struct {
 	RequestParam Param
 	SignAndUri   string
 	RequestRul   string
+	JdAppKey     string
+	AppSecret    string
+	JdHost       string
 }
 
-var _ JdSdkApi = &JdSdk{}
-
-var JdAppKey, JdAppSecret string
-
-func (J *JdSdk) New(AppId, AppSecret string) {
-	JdAppKey = AppId
-	JdAppSecret = AppSecret
+func (J *JdSdk) NewContext(AppId, AppSecret string) {
+	J.JdHost = "https://router.jd.com/api?"
+	J.JdAppKey = AppId
+	J.AppSecret = AppSecret
 	J.RequestParam = Param{
 		Method:      "",
-		App_key:     JdAppKey,
+		App_key:     J.JdAppKey,
 		Timestamp:   time.Now().Format("2006-01-02 15:04:05"),
 		Format:      "json",
 		Sign_method: "md5",
 		V:           "1.0",
 		Param_json:  "",
 	}
+}
+
+func StructToString(query interface{}) (res string, err error) {
+	marshal, err := json.Marshal(query)
+	if err != nil {
+		return res, err
+	}
+	return string(marshal), nil
+}
+
+func (J *JdSdk) BodyBytes(Method string, query interface{}) []byte {
+	toString, err := StructToString(query)
+	if err != nil {
+		panic(err)
+	}
+	J.SetSignJointUrlParam(Method, toString)
+	urls := strings.Builder{}
+	urls.WriteString(J.JdHost)
+	urls.WriteString(J.SignAndUri)
+	body, _ := HttpGet(urls.String())
+	return body
 }

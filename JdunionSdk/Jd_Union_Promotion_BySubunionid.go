@@ -28,7 +28,7 @@ func (J *JdSdk) ConversionLink(Query string) (res *SubUnionIdResult) {
 	Method := "jd.union.open.promotion.bysubunionid.get"
 	J.SetSignJointUrlParam(Method, Query)
 	var urls strings.Builder
-	urls.WriteString(JD_HOST)
+	urls.WriteString(J.JdHost)
 	urls.WriteString(J.SignAndUri)
 	body, _ := HttpGet(urls.String())
 	result := &JdUnionOpenPromotionBysubunionidGetResponse{}

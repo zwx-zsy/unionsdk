@@ -2,7 +2,6 @@ package JdunionSdk
 
 import (
 	"encoding/json"
-	"strings"
 )
 
 type GoodsResult struct {
@@ -57,14 +56,24 @@ type JdUnionOpenGoodsQueryResponse struct {
 	} `json:"jd_union_open_goods_query_response"`
 }
 
-//获取京东联盟的商品链接
-func (J *JdSdk) GetJdGoods(UriQuery string) (GoodResult *GoodsResult) {
+//请求参数
+type GoodsQueryRequest struct {
+	GoodsReqDTO struct {
+		Cid1      int64   `json:"cid1,omitempty"`      //一级类目id
+		Cid2      int64   `json:"cid2,omitempty"`      //二级类目id
+		Cid3      int64   `json:"cid3,omitempty"`      //三级类目id
+		PageIndex int     `json:"pageIndex,omitempty"` //页码
+		PageSize  int     `json:"pageSize,omitempty"`  //每页数量，单页数最大30，默认20
+		SkuIds    []int64 `json:"skuIds,omitempty"`    //skuid集合(一次最多支持查询100个sku)，数组类型开发时记得加[]
+		Keyword   string  `json:"keyword"`             //关键词，字数同京东商品名称一致，目前未限制
+		IsCoupon  int     `json:"isCoupon,omitempty"`  //是否是优惠券商品，1：有优惠券，0：无优惠券
+	} `json:"goodsReqDTO"`
+}
+
+//关键词字商品查询
+func (J *JdSdk) GetJdGoods(query interface{}) (GoodResult *GoodsResult) {
 	Method := "jd.union.open.goods.query"
-	J.SetSignJointUrlParam(Method, UriQuery)
-	var urls strings.Builder
-	urls.WriteString(JD_HOST)
-	urls.WriteString(J.SignAndUri)
-	body, _ := HttpGet(urls.String())
+	body := J.BodyBytes(Method, query)
 	result := &JdUnionOpenGoodsQueryResponse{}
 	e := json.Unmarshal([]byte(body), &result)
 	if e != nil {

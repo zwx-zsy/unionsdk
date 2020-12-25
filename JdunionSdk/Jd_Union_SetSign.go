@@ -32,7 +32,7 @@ func (J *JdSdk) SetSignJointUrlParam(Method string, ParamJson string) *JdSdk {
 	sort.Sort(SortSlice)
 	var builder strings.Builder
 	u := url.Values{}
-	builder.WriteString(JdAppSecret)
+	builder.WriteString(J.AppSecret)
 	for _, person := range SortSlice {
 		if person.Value == "" {
 			continue
@@ -40,7 +40,7 @@ func (J *JdSdk) SetSignJointUrlParam(Method string, ParamJson string) *JdSdk {
 		builder.WriteString(strings.ToLower(person.Key) + person.Value)
 		u.Add(strings.ToLower(person.Key), person.Value)
 	}
-	builder.WriteString(JdAppSecret)
+	builder.WriteString(J.AppSecret)
 
 	//生成签名
 	u.Add("sign", strings.ToUpper(Md5(builder.String())))

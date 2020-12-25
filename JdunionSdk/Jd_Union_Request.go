@@ -6,7 +6,7 @@ import (
 )
 
 func HttpGet(url string) ([]byte, error) {
-	req, _ := http.NewRequest(CUSTOMREQMETHODGET, url, nil)
+	req, _ := http.NewRequest("GET", url, nil)
 	//设置请求头部信息
 	//req.Header.Add("Authorization", q.Token)
 	//发送请求

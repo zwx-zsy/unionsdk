@@ -101,7 +101,7 @@ func (J *JdSdk) GetGoodsJFen(param string) (goodresult *JFRestult) {
 	Method := "jd.union.open.goods.jingfen.query"
 	J.SetSignJointUrlParam(Method, param)
 	var urls strings.Builder
-	urls.WriteString(JD_HOST)
+	urls.WriteString(J.JdHost)
 	urls.WriteString(J.SignAndUri)
 	body, _ := HttpGet(urls.String())
 	result := &JdUnionOpenGoodsJingfenQueryResponse{}

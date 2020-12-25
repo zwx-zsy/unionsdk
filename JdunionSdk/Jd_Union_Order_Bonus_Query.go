@@ -67,7 +67,7 @@ func (J *JdSdk) OrderBonusQuery(query string) (result *OrderBonusQueryResult) {
 	Method := "jd.union.open.order.bonus.query"
 	J.SetSignJointUrlParam(Method, query)
 	var urls strings.Builder
-	urls.WriteString(JD_HOST)
+	urls.WriteString(J.JdHost)
 	urls.WriteString(J.SignAndUri)
 	body, _ := HttpGet(urls.String())
 	response := &JdUnionOpenOrderBonusQueryResponse{}

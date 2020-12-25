@@ -84,7 +84,7 @@ func (J *JdSdk) OrderRowQuery(query string) (res *OrderRowQueryResult) {
 	Method := "jd.union.open.order.row.query"
 	J.SetSignJointUrlParam(Method, query)
 	var urls strings.Builder
-	urls.WriteString(JD_HOST)
+	urls.WriteString(J.JdHost)
 	urls.WriteString(J.SignAndUri)
 	body, _ := HttpGet(urls.String())
 	response := &JdUnionOpenOrderRowQueryResponse{}

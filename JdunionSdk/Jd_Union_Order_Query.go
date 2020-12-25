@@ -89,7 +89,7 @@ func (J *JdSdk) GetOrders(ParamJsons string) (result *OrderResult) {
 	Method := "jd.union.open.order.query"
 	J.SetSignJointUrlParam(Method, ParamJsons)
 	var urls strings.Builder
-	urls.WriteString(JD_HOST)
+	urls.WriteString(J.JdHost)
 	urls.WriteString(J.SignAndUri)
 	body, _ := HttpGet(urls.String())
 	response := &JdUnionOpenOrderQueryResponse{}

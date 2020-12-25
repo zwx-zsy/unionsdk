@@ -9,10 +9,32 @@ import (
 
 func TestCutomInterfaceGoods(t *testing.T) {
 	//var Newsapi NewJdSdkApi2
-	ParamJson := "{\"req\":{\"parentId\":0,\"grade\":0}}"
-	categorys2 := NewJDSdkCutom.NewFunc(ParamJson)
-	t.Log(categorys2)
-	fmt.Println(categorys2)
+	var S JdSdkExtend
+	S.NewContext(APPKEY, APPSECRET)
+	//ParamJson := "{\"req\":{\"parentId\":0,\"grade\":0}}"
+	ParamJson := JdunionSdk.PromotionCommonRequest{}
+	ParamJson.PromotionCodeReq.SubUnionId = "1u2o3ui123123"
+	ParamJson.PromotionCodeReq.SiteId = "4100263590"
+	ParamJson.PromotionCodeReq.MaterialId = "https://item.jd.com/69038420388.html"
+	marshal, _ := json.Marshal(ParamJson)
+	fmt.Println(string(marshal))
+	addFunc := S.AddFunc(string(marshal))
+	fmt.Println(addFunc)
+}
+
+func TestGoodsQuery(t *testing.T) {
+	var J JdSdkExtend
+	J.NewContext(APPKEY, APPSECRET)
+	//addFunc := J.AddFunc("s")
+	//fmt.Println(addFunc)
+	ParsmJson := JdunionSdk.GoodsQueryRequest{}
+	ParsmJson.GoodsReqDTO.IsCoupon = 1
+	ParsmJson.GoodsReqDTO.Keyword = "iphone12"
+	ParsmJson.GoodsReqDTO.SkuIds = []int64{}
+	ParsmJson.GoodsReqDTO.PageIndex = 1
+	ParsmJson.GoodsReqDTO.PageSize = 20
+	goods := J.GetJdGoods(ParsmJson)
+	fmt.Println(JdunionSdk.StructToString(goods))
 }
 
 func TestCommon(t *testing.T) {
@@ -22,9 +44,13 @@ func TestCommon(t *testing.T) {
 	ParamJson.PromotionCodeReq.MaterialId = "https://item.jd.com/69038420388.html"
 	marshal, _ := json.Marshal(ParamJson)
 	fmt.Println(string(marshal))
-	categorys2 := NewJDSdk.GetPromotionCommon(string(marshal))
-	t.Log(categorys2)
-	fmt.Println(categorys2)
+	//categorys2 := NewJDSdk.GetPromotionCommon(string(marshal))
+	//t.Log(categorys2)
+	//fmt.Println(categorys2)
+	var J JdSdkExtend
+	J.NewContext(APPKEY, APPSECRET)
+	addFunc := J.AddFunc(string(marshal))
+	fmt.Println(addFunc)
 }
 
 //查询分类
