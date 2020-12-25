@@ -11,10 +11,10 @@ import (
 )
 
 //生成请求参数和签名
-func (J *JdSdk) SetSignJointUrlParam(Method string, paramjson string) *JdSdk {
+func (J *JdSdk) SetSignJointUrlParam(Method string, ParamJson string) *JdSdk {
 	J.RequestParam.Method = Method
 	J.RequestParam.Timestamp = time.Now().Format("2006-01-02 15:04:05")
-	J.RequestParam.Param_json = paramjson
+	J.RequestParam.Param_json = ParamJson
 	values := reflect.ValueOf(J.RequestParam)
 	keys := reflect.TypeOf(J.RequestParam)
 	count := values.NumField()

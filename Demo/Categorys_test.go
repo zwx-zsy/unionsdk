@@ -1,16 +1,28 @@
 package Demo
 
 import (
-	"JdunionSdk_Goalng/JdunionSdk"
 	"encoding/json"
 	"fmt"
 	"testing"
+	"unionsdk/JdunionSdk"
 )
 
 func TestCutomInterfaceGoods(t *testing.T) {
 	//var Newsapi NewJdSdkApi2
 	ParamJson := "{\"req\":{\"parentId\":0,\"grade\":0}}"
 	categorys2 := NewJDSdkCutom.NewFunc(ParamJson)
+	t.Log(categorys2)
+	fmt.Println(categorys2)
+}
+
+func TestCommon(t *testing.T) {
+	ParamJson := JdunionSdk.PromotionCommonRequest{}
+	ParamJson.PromotionCodeReq.SubUnionId = "1u2o3ui123123"
+	ParamJson.PromotionCodeReq.SiteId = "4100263590"
+	ParamJson.PromotionCodeReq.MaterialId = "https://item.jd.com/69038420388.html"
+	marshal, _ := json.Marshal(ParamJson)
+	fmt.Println(string(marshal))
+	categorys2 := NewJDSdk.GetPromotionCommon(string(marshal))
 	t.Log(categorys2)
 	fmt.Println(categorys2)
 }

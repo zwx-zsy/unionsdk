@@ -73,9 +73,9 @@ type OrderResult struct {
 			SkuName             string  `json:"skuName"`             //商品名称
 			SubSideRate         float64 `json:"subSideRate"`         //分成比例
 			SubsidyRate         float64 `json:"subsidyRate"`         //补贴比例
-			giftCouponKey       string  `json:"giftCouponKey"`       //礼金批次ID：使用礼金的订单会有该值
-			giftCouponOcsAmount float64 `json:"giftCouponOcsAmount"` //礼金分摊金额：使用礼金的订单会有该值
-			unionRole           int     `json:"unionRole"`           //站长角色：1 推客 2 团长 3内容服务商
+			GiftCouponKey       string  `json:"giftCouponKey"`       //礼金批次ID：使用礼金的订单会有该值
+			GiftCouponOcsAmount float64 `json:"giftCouponOcsAmount"` //礼金分摊金额：使用礼金的订单会有该值
+			UnionRole           int     `json:"unionRole"`           //站长角色：1 推客 2 团长 3内容服务商
 		}
 		UnionId   int64  `json:"unionId"`   //推客的联盟ID
 		Ext1      string `json:"ext1"`      //推客生成推广链接时传入的扩展字段，订单维度（需要联系运营开放白名单才能拿到数据）

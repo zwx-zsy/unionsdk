@@ -1,11 +1,11 @@
 package Demo
 
 import (
-	"JdunionSdk_Goalng/JdunionSdk"
 	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
+	"unionsdk/JdunionSdk"
 )
 
 type NewJDSDKAPI interface {

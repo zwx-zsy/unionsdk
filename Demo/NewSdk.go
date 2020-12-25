@@ -1,12 +1,11 @@
 package Demo
 
-import "JdunionSdk_Goalng/JdunionSdk"
+import "unionsdk/JdunionSdk"
 
-var NewJDSdk JdunionSdk.JdSdkApi
+var NewJDSdk JdunionSdk.JdSdk
 
 //自定义京东联盟的参数APPKEY、APPSECRET
 
 func init() {
-	JdunionSdk.New(APPKEY, APPSECRET)
-	NewJDSdk = JdunionSdk.JDSDKConfig
+	NewJDSdk.New(APPKEY, APPSECRET)
 }
