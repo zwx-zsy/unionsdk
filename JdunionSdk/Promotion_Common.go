@@ -2,8 +2,6 @@ package JdunionSdk
 
 import (
 	"encoding/json"
-	"fmt"
-	"strings"
 )
 
 type JdUnionOpenPromotionCommonGetResponse struct {
@@ -36,17 +34,11 @@ type PromotionCommonRequest struct {
 	} `json:"promotionCodeReq"`
 }
 
-func (J *JdSdk) PromotionCommon(query string) (res *PromotionCommonResult) {
+func (J *JdSdk) PromotionCommon(query interface{}) (res *PromotionCommonResult) {
 	Method := "jd.union.open.promotion.common.get"
-	J.SetSignJointUrlParam(Method, query)
-	var urls strings.Builder
-	urls.WriteString(J.JdHost)
-	urls.WriteString(J.SignAndUri)
-	fmt.Println(urls.String())
-	body, _ := HttpGet(urls.String())
-	fmt.Println(string(body))
+	bodyBytes := J.BodyBytes(Method, query)
 	result := &JdUnionOpenPromotionCommonGetResponse{}
-	e := json.Unmarshal([]byte(body), &result)
+	e := json.Unmarshal([]byte(bodyBytes), &result)
 	if e != nil {
 		panic(e)
 	}
@@ -56,5 +48,4 @@ func (J *JdSdk) PromotionCommon(query string) (res *PromotionCommonResult) {
 		panic(e)
 	}
 	return res
-	return
 }

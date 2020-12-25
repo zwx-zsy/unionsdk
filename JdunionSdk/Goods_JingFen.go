@@ -2,7 +2,6 @@ package JdunionSdk
 
 import (
 	"encoding/json"
-	"strings"
 )
 
 /*
@@ -97,15 +96,11 @@ type JFRestult struct {
 	RequestId  string `json:"requestId"`
 }
 
-func (J *JdSdk) GetGoodsJFen(param string) (goodresult *JFRestult) {
+func (J *JdSdk) GetGoodsJFen(query interface{}) (goodresult *JFRestult) {
 	Method := "jd.union.open.goods.jingfen.query"
-	J.SetSignJointUrlParam(Method, param)
-	var urls strings.Builder
-	urls.WriteString(J.JdHost)
-	urls.WriteString(J.SignAndUri)
-	body, _ := HttpGet(urls.String())
+	bodyBytes := J.BodyBytes(Method, query)
 	result := &JdUnionOpenGoodsJingfenQueryResponse{}
-	e := json.Unmarshal([]byte(body), &result)
+	e := json.Unmarshal([]byte(bodyBytes), &result)
 	if e != nil {
 		panic(e)
 	}

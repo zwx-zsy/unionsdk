@@ -14,5 +14,5 @@ func (p Persons) Len() int { return len(p) }
 func (p Persons) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
 
 func (p Persons) Less(i, j int) bool {
-	return p[i].Key < p[j].Key
+	return p[i].Key < p[j].Key //根据key 排序
 }

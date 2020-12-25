@@ -2,11 +2,9 @@ package JdunionSdk
 
 import (
 	"encoding/json"
-	"strings"
 )
 
 /*商品类型返回数据结构体*/
-//start
 type CategoryResponse struct {
 	JdUnionOpenCategoryGoodsGetResponse struct {
 		Result string `json:"result"`
@@ -26,19 +24,12 @@ type CateGoryResult struct {
 	RequestId string `json:"requestId"`
 }
 
-//end
-
 //获取京东商品类型列表
-
-func (J *JdSdk) GetCategoryList(UriQuery string) (categoryResult *CateGoryResult) {
+func (J *JdSdk) GetCategoryList(query interface{}) (categoryResult *CateGoryResult) {
 	Method := "jd.union.open.category.goods.get"
-	J.SetSignJointUrlParam(Method, UriQuery)
-	var urls strings.Builder
-	urls.WriteString(J.JdHost)
-	urls.WriteString(J.SignAndUri)
-	body, _ := HttpGet(urls.String())
+	bodyBytes := J.BodyBytes(Method, query)
 	result := &CategoryResponse{}
-	e := json.Unmarshal([]byte(body), &result)
+	e := json.Unmarshal([]byte(bodyBytes), &result)
 	if e != nil {
 		panic(e)
 	}

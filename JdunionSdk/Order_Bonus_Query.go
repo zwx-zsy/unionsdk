@@ -2,7 +2,6 @@ package JdunionSdk
 
 import (
 	"encoding/json"
-	"strings"
 )
 
 type OrderBonusQueryResult struct {
@@ -63,15 +62,11 @@ type OrderBonusQueryRequest struct {
 	} `json:"orderReq"`
 }
 
-func (J *JdSdk) OrderBonusQuery(query string) (result *OrderBonusQueryResult) {
+func (J *JdSdk) OrderBonusQuery(query interface{}) (result *OrderBonusQueryResult) {
 	Method := "jd.union.open.order.bonus.query"
-	J.SetSignJointUrlParam(Method, query)
-	var urls strings.Builder
-	urls.WriteString(J.JdHost)
-	urls.WriteString(J.SignAndUri)
-	body, _ := HttpGet(urls.String())
+	bodyBytes := J.BodyBytes(Method, query)
 	response := &JdUnionOpenOrderBonusQueryResponse{}
-	e := json.Unmarshal([]byte(body), &response)
+	e := json.Unmarshal([]byte(bodyBytes), &response)
 	if e != nil {
 		panic(e)
 	}

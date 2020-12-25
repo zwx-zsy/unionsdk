@@ -2,7 +2,6 @@ package JdunionSdk
 
 import (
 	"encoding/json"
-	"strings"
 	"time"
 )
 
@@ -80,15 +79,11 @@ type OrderRowQueryResult struct {
 	}
 }
 
-func (J *JdSdk) OrderRowQuery(query string) (res *OrderRowQueryResult) {
+func (J *JdSdk) OrderRowQuery(query interface{}) (res *OrderRowQueryResult) {
 	Method := "jd.union.open.order.row.query"
-	J.SetSignJointUrlParam(Method, query)
-	var urls strings.Builder
-	urls.WriteString(J.JdHost)
-	urls.WriteString(J.SignAndUri)
-	body, _ := HttpGet(urls.String())
+	bodyBytes := J.BodyBytes(Method, query)
 	response := &JdUnionOpenOrderRowQueryResponse{}
-	e := json.Unmarshal([]byte(body), &response)
+	e := json.Unmarshal([]byte(bodyBytes), &response)
 	if e != nil {
 		panic(e)
 	}

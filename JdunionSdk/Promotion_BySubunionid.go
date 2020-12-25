@@ -2,7 +2,6 @@ package JdunionSdk
 
 import (
 	"encoding/json"
-	"strings"
 )
 
 //转换链接
@@ -24,15 +23,12 @@ type SubUnionIdResult struct {
 }
 
 //转换链接
-func (J *JdSdk) ConversionLink(Query string) (res *SubUnionIdResult) {
+func (J *JdSdk) ConversionLink(Query interface{}) (res *SubUnionIdResult) {
 	Method := "jd.union.open.promotion.bysubunionid.get"
-	J.SetSignJointUrlParam(Method, Query)
-	var urls strings.Builder
-	urls.WriteString(J.JdHost)
-	urls.WriteString(J.SignAndUri)
-	body, _ := HttpGet(urls.String())
+	bodyBytes := J.BodyBytes(Method, Query)
+
 	result := &JdUnionOpenPromotionBysubunionidGetResponse{}
-	e := json.Unmarshal([]byte(body), &result)
+	e := json.Unmarshal([]byte(bodyBytes), &result)
 	if e != nil {
 		panic(e)
 	}

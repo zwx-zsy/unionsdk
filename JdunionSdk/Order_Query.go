@@ -2,7 +2,6 @@ package JdunionSdk
 
 import (
 	"encoding/json"
-	"strings"
 	"time"
 )
 
@@ -85,15 +84,11 @@ type OrderResult struct {
 }
 
 //获取订单
-func (J *JdSdk) GetOrders(ParamJsons string) (result *OrderResult) {
+func (J *JdSdk) GetOrders(query interface{}) (result *OrderResult) {
 	Method := "jd.union.open.order.query"
-	J.SetSignJointUrlParam(Method, ParamJsons)
-	var urls strings.Builder
-	urls.WriteString(J.JdHost)
-	urls.WriteString(J.SignAndUri)
-	body, _ := HttpGet(urls.String())
+	bodyBytes := J.BodyBytes(Method, query)
 	response := &JdUnionOpenOrderQueryResponse{}
-	e := json.Unmarshal([]byte(body), &response)
+	e := json.Unmarshal([]byte(bodyBytes), &response)
 	if e != nil {
 		panic(e)
 	}
