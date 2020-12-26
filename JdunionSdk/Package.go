@@ -2,7 +2,6 @@ package JdunionSdk
 
 import (
 	"encoding/json"
-	"fmt"
 	"strings"
 	"time"
 )
@@ -74,6 +73,5 @@ func (J *JdSdk) BodyBytes(Method string, query interface{}) []byte {
 	urls.WriteString(J.JdHost)
 	urls.WriteString(J.SignAndUri)
 	body, _ := HttpGet(urls.String())
-	fmt.Println(urls.String())
 	return body
 }

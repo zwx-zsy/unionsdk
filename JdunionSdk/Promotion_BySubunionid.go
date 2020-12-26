@@ -50,3 +50,7 @@ type PromotionCodeReq struct {
 	CouponUrl  string `json:"couponUrl,omitempty"`  //优惠券领取链接，在使用优惠券、商品二合一功能时入参，且materialId须为商品详情页链接
 	ChainType  int    `json:"chainType,omitempty"`  //转链类型，1：长链， 2 ：短链 ，3： 长链+短链，默认短链
 }
+
+type BySubUnionIdRequest struct {
+	PromotionCodeReq PromotionCodeReq `json:"promotionCodeReq"`
+}
