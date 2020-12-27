@@ -11,6 +11,8 @@ type GoodsResult struct {
 		BrandCode         string  `json:"brandCode"`
 		BrandName         string  `json:"brandName"`
 		GoodCommentsShare float64 `json:"goodCommentsShare"`
+		MaterialUrl       string  `json:"materialUrl"`
+		Owner             string  `json:"owner"`
 		CouponInfo        struct {
 			CouponList []struct {
 				Discount float64 `json:"discount"`
@@ -25,8 +27,10 @@ type GoodsResult struct {
 		SkuId     int64  `json:"skuId"`
 		SkuName   string `json:"skuName"`
 		PriceInfo struct {
-			Price       float64 `json:"price"`
-			LowestPrice float64 `json:"lowestprice"`
+			Price             float64 `json:"price"`
+			LowestPrice       float64 `json:"lowestPrice"`
+			LowestPriceType   int     `json:"lowestPriceType"`
+			LowestCouponPrice int     `json:"lowestCouponPrice"`
 		} `json:"priceInfo"`
 		ImageInfo struct {
 			ImageList []struct {
