@@ -3,7 +3,6 @@ package Jdunion
 import (
 	"crypto/md5"
 	"encoding/hex"
-	"fmt"
 	"net/url"
 	"reflect"
 	"sort"
@@ -39,7 +38,6 @@ func (J *JdSdk) SetSignJointUrlParam(Method string, ParamJson string) *JdSdk {
 	}
 	//fmt.Println(SortSlice)
 	sort.Sort(SortSlice)
-	fmt.Println(SortSlice)
 	var builder strings.Builder
 	u := url.Values{}
 	builder.WriteString(J.AppSecret)
@@ -51,7 +49,6 @@ func (J *JdSdk) SetSignJointUrlParam(Method string, ParamJson string) *JdSdk {
 		u.Add(strings.ToLower(person.Key), person.Value)
 	}
 	builder.WriteString(J.AppSecret)
-	fmt.Println("builder.String()", builder.String())
 	//生成签名
 	u.Add("sign", strings.ToUpper(Md5(builder.String())))
 	//拼接参数
