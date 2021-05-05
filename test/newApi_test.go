@@ -1,9 +1,10 @@
 package newApi_test
 
 import (
-	Jd "JdunionSdk/Jdunion"
-	"github.com/golang/glog"
 	"testing"
+	Jd "unionsdk/Jdunion"
+
+	"github.com/golang/glog"
 )
 
 const (
