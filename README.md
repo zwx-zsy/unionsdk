@@ -11,7 +11,7 @@
 go get https://github.com/yancyzhou/Jdunionsdk.git
 ```
 
-﻿京东联盟 SDK unionsdk
+﻿ 京东联盟 SDK unionsdk
 ===================
 作者接一切数据&Web&小程序开发外包服务，介绍人提供10%-20%佣金。可签合同、开正规公司发票。
 
@@ -22,7 +22,7 @@ go get https://github.com/yancyzhou/Jdunionsdk.git
 
 
 
-所有功能都有对应的极为详尽的由作者煞费苦心写的文档及具体的使用例子，可以到docs目录中查看各个文件的文档，新手请参阅[新手教程][2]。
+所有功能都有对应的极为详尽的由作者煞费苦心写的文档及具体的使用例子，可以到test目录中查看各个文件的文档。
 
 使用方法：
 
