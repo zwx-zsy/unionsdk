@@ -23,6 +23,8 @@ type GoodsResult struct {
 	Data    []struct {
 		CategoryInfo struct {
 			Cid1 int64 `json:"cid1"`
+			Cid2 int64 `json:"cid2"`
+			Cid3 int64 `json:"cid3"`
 		} `json:"categoryInfo"`
 		BrandCode          string  `json:"brandCode"`
 		BrandName          string  `json:"brandName"`
