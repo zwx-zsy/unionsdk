@@ -19,8 +19,6 @@ type JdSdkApi interface {
 	SetSignJointUrlParam(Method string, query string) *JdSdk
 }
 
-//var _ JdSdkApi = &JdSdk{}
-
 type Param struct {
 	Method       string `json:"method"`
 	App_key      string `json:"app_key"`

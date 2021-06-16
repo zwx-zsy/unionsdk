@@ -132,4 +132,5 @@ type GoodsReqDTO struct {
 	HasBestCoupon        int     `json:"hasBestCoupon,omitempty"`        //1：查询有最优惠券商品；其他值过滤掉此入参条件。
 	Pid                  string  `json:"pid,omitempty"`                  //联盟id_应用iD_推广位id
 	CouponUrl            string  `json:"couponUrl,omitempty"`            //优惠券链接
+	ForbidTypes          string  `json:"forbidTypes,omitempty"`          //过滤商品
 }

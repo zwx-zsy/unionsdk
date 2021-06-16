@@ -1,8 +1,8 @@
-package newApi_test
+package jdunion_test
 
 import (
 	"testing"
-	"unionsdk/Jdunion"
+	Jd "unionsdk/Jdunion"
 
 	"github.com/golang/glog"
 )
@@ -12,7 +12,7 @@ const (
 	AppSecret string = ""
 )
 
-var Jds Jdunion.JdSdk
+var Jds Jd.JdSdk
 
 //京粉精选商品查询接口
 func TestGetGoodsJFen(t *testing.T) {
